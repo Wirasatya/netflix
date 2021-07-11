@@ -1,0 +1,63 @@
+.topbar {
+  color: white;
+  width: 100%;
+  font-size: 14px;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  background: linear-gradient(to top, transparent 0%, rgba(0, 0, 0, 0.3) 50%);
+  &.scrolled {
+    background-color: var(--main-color);
+  }
+  .container {
+    padding: 0 46px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 69px;
+    .left {
+      display: flex;
+      align-items: centesr;
+      img {
+        height: 25px;
+        margin-right: 40px;
+      }
+      span {
+        margin-right: 20px;
+        cursor: pointer;
+      }
+    }
+    .right{
+        display: flex;
+        align-items: center;
+        .icon{
+            cursor: pointer;
+            padding: 10px;
+        }
+        img{
+            width: 30px;
+            height: 30px;
+            object-fit: cover;
+            cursor: pointer;
+            border-radius: 20px;
+        }
+        .profile{
+            .options{
+                display: none;
+                background-color: var(--main-color);
+            }
+            span{
+                padding: 10px;
+                cursor: pointer;
+            }
+            &:hover{
+                .options{
+                    display: flex;
+                    position: absolute;
+                    flex-direction: column;
+                }
+            }
+        }
+    }
+  }
+}
