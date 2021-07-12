@@ -2,31 +2,42 @@ import {
   ArrowBackIosOutlined,
   ArrowForwardIosOutlined,
 } from "@material-ui/icons";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ListItem from "../ListItem/ListItem";
 import "./list.scss";
+import axios from "../../axios";
 
-const List = () => {
+const List = ({ title, fetchUrl, genres }) => {
   const [isMoved, setIsMoved] = useState(false);
   const [slideNumber, setSlideNumber] = useState(0);
-
+  const [movies, setMovies] = useState([]);
+  const [trailerUrl, setTrailerUrl] = useState("");
   const listRef = useRef();
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get(fetchUrl);
+      setMovies(response.data.results);
+      return response;
+    }
+    fetchData();
+  }, [fetchUrl]);
 
   const handleClick = (direction) => {
     setIsMoved(true);
     let distance = listRef.current.getBoundingClientRect().x - 50;
     if (direction === "left" && slideNumber > 0) {
       setSlideNumber(slideNumber - 1);
-      listRef.current.style.transform = `translateX(${230 + distance}px)`;
+      listRef.current.style.transform = `translateX(${250 + distance}px)`;
     }
-    if (direction === "right" && slideNumber < 5) {
+    if (direction === "right" && slideNumber < 15) {
       setSlideNumber(slideNumber + 1);
-      listRef.current.style.transform = `translateX(${-230 + distance}px)`;
+      listRef.current.style.transform = `translateX(${-250 + distance}px)`;
     }
   };
   return (
     <div className="list">
-      <span className="listTitle">Continue to watch</span>
+      <span className="listTitle">{title}</span>
       <div className="wrapper">
         <ArrowBackIosOutlined
           className="sliderArrow left"
@@ -34,16 +45,16 @@ const List = () => {
           style={{ display: !isMoved && "none" }}
         />
         <div className="container" ref={listRef}>
-          <ListItem index={0} />
-          <ListItem index={1} />
-          <ListItem index={2} />
-          <ListItem index={3} />
-          <ListItem index={4} />
-          <ListItem index={5} />
-          <ListItem index={6} />
-          <ListItem index={7} />
-          <ListItem index={8} />
-          <ListItem index={9} />
+          {movies.map((movie, index) => (
+            <ListItem
+              key={movie.id}
+              index={index}
+              item={movie}
+              setTrailerUrl={setTrailerUrl}
+              trailerUrl={trailerUrl}
+              genres={genres}
+            />
+          ))}
         </div>
         <ArrowForwardIosOutlined
           className="sliderArrow right"
