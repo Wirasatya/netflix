@@ -5,13 +5,20 @@ import {
   ThumbUpAltOutlined,
   ThumbDownOutlined,
 } from "@material-ui/icons";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Youtube from "react-youtube";
 import axios from "../../axios";
 
 const baseImgUrl = "https://image.tmdb.org/t/p/original";
 
-const ListItem = ({ index, item, setTrailerUrl, trailerUrl, genres }) => {
+const ListItem = ({
+  index,
+  item,
+  setTrailerUrl,
+  trailerUrl,
+  genres,
+  isLargeRow,
+}) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleClick = async () => {
@@ -39,12 +46,20 @@ const ListItem = ({ index, item, setTrailerUrl, trailerUrl, genres }) => {
       onClick={handleClick}
       className="listItem"
       style={{
+        height: isLargeRow && "300px",
         left: isHovered && index * 225 - 50 + index * 2.5,
       }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <img src={`${baseImgUrl}${item.poster_path}`} alt={`${item.title}`} />
+      <img
+        src={
+          isLargeRow
+            ? `${baseImgUrl}${item.backdrop_path}`
+            : `${baseImgUrl}${item.poster_path}`
+        }
+        alt={`${item.title}`}
+      />
       {isHovered && (
         <>
           {trailerUrl && (

@@ -32,11 +32,13 @@
     color: white;
     display: flex;
     flex-direction: column;
-    img {
-      width: 400px;
+    h1 {
+      font-size: 50px;
+      text-shadow: 0 0 10px #0f0202, 0 0 10px #06063f;
     }
     .desc {
       margin: 20px 0;
+      text-shadow: 0 0 10px #0f0202, 0 0 10px #06063f;
     }
     .buttons {
       display: flex;
@@ -54,22 +56,22 @@
         &.play {
           background-color: white;
           color: var(--main-color);
-          transition: .5s ease-in-out;
+          transition: 0.5s ease-in-out;
           border: 1px solid transparent;
           &:hover {
             background-color: var(--main-color);
-            color:white ;
+            color: white;
             border: 1px solid white !important;
           }
         }
         &.more {
           background-color: gray;
           color: white;
-          transition: .5s ease-in-out;
+          transition: 0.5s ease-in-out;
           border: 1px solid transparent;
           &:hover {
             background-color: var(--main-color);
-            color:white ;
+            color: white;
             border: 1px solid white !important;
           }
         }

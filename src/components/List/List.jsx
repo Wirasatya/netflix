@@ -7,7 +7,7 @@ import ListItem from "../ListItem/ListItem";
 import "./list.scss";
 import axios from "../../axios";
 
-const List = ({ title, fetchUrl, genres }) => {
+const List = ({ title, fetchUrl, genres, isLargeRow }) => {
   const [isMoved, setIsMoved] = useState(false);
   const [slideNumber, setSlideNumber] = useState(0);
   const [movies, setMovies] = useState([]);
@@ -47,6 +47,7 @@ const List = ({ title, fetchUrl, genres }) => {
         <div className="container" ref={listRef}>
           {movies.map((movie, index) => (
             <ListItem
+              isLargeRow={isLargeRow}
               key={movie.id}
               index={index}
               item={movie}

@@ -24,6 +24,12 @@ const Home = () => {
       <Topbar></Topbar>
       <Featured></Featured>
       <List
+        title="NETFLIX ORIGINALS"
+        fetchUrl={requests.fetchNetflixOriginals}
+        genres={genres}
+        isLargeRow
+      />
+      <List
         title="Trending Now"
         fetchUrl={requests.fetchTrending}
         genres={genres}
